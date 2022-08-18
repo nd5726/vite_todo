@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .is-invalid {
+    @apply border-red-700 border-2;
+  }
+}
