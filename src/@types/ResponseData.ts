@@ -1,10 +1,10 @@
-export default interface ResponseData {
-  data: any;
-}
+// export interface ResponseData {
+//   data: any;
+//   headers?: any;
+// }
 
-// export default interface ApiResponse<T = any> {
-//     message: string
-//     success: boolean
-//     total: number
-//     data: T
-//   }
+export default interface ResponseData<T = any> {
+  headers?: any;
+  data: T;
+  todos: T;
+}

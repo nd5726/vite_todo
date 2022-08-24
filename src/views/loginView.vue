@@ -8,6 +8,7 @@
         </h1>
         <v-form
           v-slot="{ errors }"
+          @submit="submitHandler"
           class="max-w-[300px] text-center mx-auto py-6"
         >
           <div class="flex flex-col mb-4 items-start">
@@ -15,6 +16,7 @@
               >Email</label
             >
             <v-field
+              v-model="user.email"
               type="email"
               name="email"
               label="Email"
@@ -33,6 +35,7 @@
               >密碼</label
             >
             <v-field
+              v-model="user.password"
               type="password"
               name="password"
               label="密碼"
@@ -72,4 +75,34 @@
 }
 </style>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { reactive } from "vue";
+import { accountUser } from "@/@types/accountUser";
+import LoginService from "@/services/loginService";
+import router from "@/router";
+
+const user: accountUser = reactive({
+  email: "",
+  password: "",
+});
+
+const login = async () => {
+  try {
+    const res = await LoginService.login(user);
+    console.log(res);
+    const { authorization } = res.headers;
+    const { nickname } = res.data;
+
+    document.cookie = `token=${authorization};`;
+    document.cookie = `nickname=${nickname};`;
+
+    router.push("/main");
+  } catch (e) {
+    console.dir(e);
+  }
+};
+
+const submitHandler = () => {
+  login();
+};
+</script>

@@ -17,6 +17,11 @@ a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
+  outline: none;
+}
+
+button {
+  outline: none;
 }
 
 a:hover {

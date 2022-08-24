@@ -1,10 +1,10 @@
-import http from "../http-common";
+import { apiHelper } from "../http-common";
 
-import ResponseData from "@/@types/ResponseData";
+import ResponseData from "@/@types/responseData";
 
 class RegisterService {
   register(data: any): Promise<ResponseData> {
-    return http.post("/users", { data });
+    return apiHelper.post("/users", { user: data });
   }
 }
 

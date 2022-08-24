@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 
+/** vue-validate */
 import { Field, Form, ErrorMessage, defineRule, configure } from "vee-validate";
 import { localize, setLocale } from "@vee-validate/i18n";
 import zh_TW from "@vee-validate/i18n/dist/locale/zh_TW.json";
@@ -7,6 +8,10 @@ import AllRules from "@vee-validate/rules";
 
 import App from "./App.vue";
 import router from "./router";
+
+/** vue-loading-overlay */
+import { useLoading } from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 
 import "./css/style.css";
 import "./css/index.css";
@@ -29,5 +34,8 @@ app.component("VForm", Form);
 app.component("VField", Field);
 app.component("ErrorMessage", ErrorMessage);
 
+app.provide("$loading", useLoading());
+
 app.use(router);
+
 app.mount("#app");

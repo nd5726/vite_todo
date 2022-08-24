@@ -10,7 +10,7 @@
               >Email</label
             >
             <v-field
-              v-model="account.email"
+              v-model="user.email"
               type="email"
               name="email"
               label="Email"
@@ -28,7 +28,7 @@
               >暱稱</label
             >
             <v-field
-              v-model="account.nickname"
+              v-model="user.nickname"
               type="text"
               name="nickname"
               label="暱稱"
@@ -46,7 +46,7 @@
               >密碼</label
             >
             <v-field
-              v-model="account.password"
+              v-model="user.password"
               type="password"
               label="密碼"
               name="password"
@@ -85,7 +85,7 @@
           </button>
           <br />
           <router-link
-            to="/"
+            to="/login"
             class="text-font-main inline-block text-base font-bold my-6"
             >登入</router-link
           >
@@ -104,22 +104,30 @@
 </style>
 
 <script setup lang="ts">
-import { onMounted, reactive } from "vue";
-import RegisterUser from "@/@types/RegisterUser";
-import RegisterService from "@/services/RegisterService";
+import { reactive, inject } from "vue";
+import { registerUser } from "@/@types/registerUser";
+import RegisterService from "@/services/registerService";
+import router from "@/router";
+// import { useLoading } from "vue-loading-overlay";
 
-const account: RegisterUser = reactive({
+const user: registerUser = reactive({
   email: "",
   nickname: "",
   password: "",
 });
 
+const $loading: any = inject("$loading");
+
 const Submit = async () => {
+  const loader = $loading.show();
+
   try {
-    const res = await RegisterService.register(account);
-    console.log(res);
+    await RegisterService.register(user);
+    router.push("/");
   } catch (e) {
     console.dir(e);
+  } finally {
+    loader.hide();
   }
 };
 </script>
