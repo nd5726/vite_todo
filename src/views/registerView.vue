@@ -4,7 +4,9 @@
       <div class="login_left min-h-screen w-1/2"></div>
       <div class="w-1/2 p-8">
         <v-form class="max-w-[304px] text-center mx-auto">
-          <h1 class="text-2xl font-bold text-left py-6">註冊帳號</h1>
+          <h1 class="text-2xl font-bold text-left py-6 text-font-main">
+            註冊帳號
+          </h1>
           <div class="flex flex-col mb-4 items-start">
             <label class="text-base font-bold text-font-main pb-1" for=""
               >Email</label
@@ -123,7 +125,7 @@ const Submit = async () => {
 
   try {
     await RegisterService.register(user);
-    router.push("/");
+    router.push("/login");
   } catch (e) {
     console.dir(e);
   } finally {

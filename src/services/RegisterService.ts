@@ -3,8 +3,8 @@ import { apiHelper } from "../http-common";
 import ResponseData from "@/@types/responseData";
 
 class RegisterService {
-  register(data: any): Promise<ResponseData> {
-    return apiHelper.post("/users", { user: data });
+  register(data: any) {
+    return apiHelper.post<ResponseData>("/users", { user: data });
   }
 }
 

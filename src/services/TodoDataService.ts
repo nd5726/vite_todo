@@ -7,16 +7,16 @@ class TodoDataService {
     return apiHelper.get<ResponseData<todoData[]>>("/todos");
   }
 
-  create(data: any) {
-    return apiHelper.post<ResponseData>("/todos", { content: data });
+  create(data: todoData) {
+    return apiHelper.post<ResponseData>("/todos", { todo: data });
   }
 
-  update(id: string): Promise<ResponseData> {
-    return apiHelper.patch(`/todos/${id}/toggle`);
+  update(id: string) {
+    return apiHelper.patch<ResponseData>(`/todos/${id}/toggle`);
   }
 
-  delete(id: any): Promise<ResponseData> {
-    return apiHelper.delete(`/todos/${id}`);
+  delete(id: string) {
+    return apiHelper.delete<ResponseData>(`/todos/${id}`);
   }
 }
 

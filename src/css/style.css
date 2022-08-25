@@ -1,5 +1,4 @@
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
@@ -17,10 +16,6 @@ a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
-  outline: none;
-}
-
-button {
   outline: none;
 }
 
@@ -49,15 +44,18 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  outline: none;
 }
 
 button:hover {
-  border-color: #646cff;
+  /* border-color: #646cff; */
 }
 
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: none;
+
+  /* outline: 4px auto -webkit-focus-ring-color; */
 }
 
 .card {

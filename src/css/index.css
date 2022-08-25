@@ -1,3 +1,5 @@
+@import "https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700&display=swap";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,12 +16,8 @@
   }
 
   #app {
-    font-family: "Noto Sans TC", serif;
-  }
-
-  button:focus,
-  input:focus {
-    outline: 2px solid #f90;
+    /* stylelint-disable-next-line font-family-no-missing-generic-family-keyword */
+    font-family: "Noto Sans TC", "微軟正黑體";
   }
 
   input[type="checkbox"] {
@@ -65,5 +63,9 @@
     background-position: center center;
     width: 15px;
     height: 15px;
+  }
+
+  .current {
+    @apply border-b-2 border-font-main font-bold text-font-main;
   }
 }
