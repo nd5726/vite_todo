@@ -11,72 +11,56 @@
             <label class="text-base font-bold text-font-main pb-1" for=""
               >Email</label
             >
-            <v-field
+            <InputText
               v-model="user.email"
-              type="email"
               name="email"
-              label="Email"
-              class="bg-white text-font-main rounded-[10px] px-4 py-3 w-full"
-              placeholder="請輸入Email"
+              inputType="email"
+              placeHolder="請輸入Email"
               rules="required|email"
-            ></v-field>
-            <error-message
-              name="email"
-              class="text-red-700 pl-2"
-            ></error-message>
+              labelValue="Email"
+              classValue="bg-white text-font-main rounded-[10px] px-4 py-3 w-full"
+            ></InputText>
           </div>
           <div class="flex flex-col mb-4 items-start">
             <label class="text-base font-bold text-font-main pb-1" for=""
               >暱稱</label
             >
-            <v-field
+            <InputText
               v-model="user.nickname"
-              type="text"
               name="nickname"
-              label="暱稱"
-              class="bg-white text-font-main rounded-[10px] px-4 py-3 w-full"
-              placeholder="請輸入您的暱稱"
+              inputType="text"
+              placeHolder="請輸入您的暱稱"
               rules="required"
-            ></v-field>
-            <error-message
-              name="nickname"
-              class="text-red-700 pl-2"
-            ></error-message>
+              labelValue="暱稱"
+              classValue="bg-white text-font-main rounded-[10px] px-4 py-3 w-full"
+            ></InputText>
           </div>
           <div class="flex flex-col mb-6 items-start">
             <label class="text-base font-bold text-font-main pb-1" for=""
               >密碼</label
             >
-            <v-field
+            <InputText
               v-model="user.password"
-              type="password"
-              label="密碼"
               name="password"
-              class="bg-white text-font-main rounded-[10px] px-4 py-3 w-full"
-              placeholder="請輸入密碼"
+              inputType="password"
+              placeHolder="請輸入密碼"
               rules="required|min:6"
-            ></v-field>
-            <error-message
-              name="password"
-              class="text-red-700 pl-2"
-            ></error-message>
+              labelValue="密碼"
+              classValue="bg-white text-font-main rounded-[10px] px-4 py-3 w-full"
+            ></InputText>
           </div>
           <div class="flex flex-col mb-6 items-start">
             <label class="text-base font-bold text-font-main pb-1" for=""
               >再次輸入密碼</label
             >
-            <v-field
-              type="password"
+            <InputText
               name="confirmPWD"
-              label="再次輸入密碼"
-              class="bg-white text-font-main rounded-[10px] px-4 py-3 w-full"
-              placeholder="請再次輸入密碼"
+              inputType="password"
+              placeHolder="請再次輸入密碼"
               rules="required|confirmed:@password|min:6"
-            ></v-field>
-            <error-message
-              name="confirmPWD"
-              class="text-red-700 pl-2"
-            ></error-message>
+              labelValue="再次輸入密碼"
+              classValue="bg-white text-font-main rounded-[10px] px-4 py-3 w-full"
+            ></InputText>
           </div>
           <button
             type="button"
@@ -110,6 +94,7 @@ import { reactive, inject } from "vue";
 import { registerUser } from "@/@types/registerUser";
 import RegisterService from "@/services/registerService";
 import router from "@/router";
+import { InputText } from "@/components";
 // import { useLoading } from "vue-loading-overlay";
 
 const user: registerUser = reactive({
@@ -126,6 +111,7 @@ const Submit = async () => {
   try {
     await RegisterService.register(user);
     router.push("/login");
+    alert("註冊成功，請重新登入");
   } catch (e) {
     console.dir(e);
   } finally {

@@ -108,7 +108,9 @@ import { todoData } from "@/@types/todoData";
 const data = ref<todoData>({} as todoData);
 
 const current = ref<string>("all");
+
 const dataList = ref<todoData[]>([]);
+
 const showList = ref<todoData[]>([]);
 
 /** 取得nickname */
@@ -138,6 +140,7 @@ const fetchData = async () => {
     } = await TodoDataService.getAll();
     dataList.value = todos;
     showList.value = { ...dataList.value };
+    current.value = "all";
   } catch (e) {
   } finally {
     loader.hide();
@@ -145,19 +148,19 @@ const fetchData = async () => {
 };
 
 const showData = (option: string) => {
-  showList.value = dataList.value.filter(({ completed_at }) => {
-    switch (option) {
-      case "all":
-        current.value = "all";
-        return true;
-      case "not_finish":
-        current.value = "not_finish";
-        return completed_at === null;
-      case "finish":
-        current.value = "finish";
-        return completed_at !== null;
-    }
-  });
+  current.value = option;
+  if (dataList.value) {
+    showList.value = dataList.value.filter(({ completed_at }) => {
+      switch (option) {
+        case "all":
+          return true;
+        case "not_finish":
+          return completed_at === null;
+        case "finish":
+          return completed_at !== null;
+      }
+    });
+  }
 };
 
 const addData = async () => {
@@ -189,7 +192,7 @@ const deleteFinishHandler = async () => {
   await Promise.all(
     dataList.value.map((item) => {
       if (item.completed_at !== null) {
-        return deleteData(item.id!); // 要return，會return Promise
+        return deleteData(item.id!); // 會return Promise
       }
     })
   );
@@ -210,8 +213,8 @@ const logOutHandler = async () => {
   try {
     const res = await LoginService.logout();
     document.cookie = "token=; nickname=;";
-    alert(res.data.message);
     router.push("/login");
+    alert(res.data.message);
   } catch (e) {
     console.dir(e);
   }
