@@ -3,7 +3,7 @@
     <div class="flex items-center max-w-[1028px] mx-auto">
       <div class="login_left min-h-screen w-1/2"></div>
       <div class="w-1/2 p-8">
-        <v-form class="max-w-[304px] text-center mx-auto">
+        <v-form  v-slot="{ errors }" class="max-w-[304px] text-center mx-auto">
           <h1 class="text-2xl font-bold text-left py-6 text-font-main">
             註冊帳號
           </h1>
@@ -18,7 +18,7 @@
               placeHolder="請輸入Email"
               rules="required|email"
               labelValue="Email"
-              classValue="bg-white text-font-main rounded-[10px] px-4 py-3 w-full"
+              :classValue="['bg-white text-font-main rounded-[10px] px-4 py-3 w-full' , { 'is-invalid': errors['email'] }]"
             ></InputText>
           </div>
           <div class="flex flex-col mb-4 items-start">
@@ -32,7 +32,7 @@
               placeHolder="請輸入您的暱稱"
               rules="required"
               labelValue="暱稱"
-              classValue="bg-white text-font-main rounded-[10px] px-4 py-3 w-full"
+              :classValue="['bg-white text-font-main rounded-[10px] px-4 py-3 w-full' , { 'is-invalid': errors['nickname'] }]"
             ></InputText>
           </div>
           <div class="flex flex-col mb-6 items-start">
@@ -46,7 +46,7 @@
               placeHolder="請輸入密碼"
               rules="required|min:6"
               labelValue="密碼"
-              classValue="bg-white text-font-main rounded-[10px] px-4 py-3 w-full"
+              :classValue="['bg-white text-font-main rounded-[10px] px-4 py-3 w-full' , { 'is-invalid': errors['password'] }]"
             ></InputText>
           </div>
           <div class="flex flex-col mb-6 items-start">
@@ -59,7 +59,7 @@
               placeHolder="請再次輸入密碼"
               rules="required|confirmed:@password|min:6"
               labelValue="再次輸入密碼"
-              classValue="bg-white text-font-main rounded-[10px] px-4 py-3 w-full"
+              :classValue="['bg-white text-font-main rounded-[10px] px-4 py-3 w-full' , { 'is-invalid': errors['confirmPWD'] }]"
             ></InputText>
           </div>
           <button
@@ -107,7 +107,7 @@ const $loading: any = inject("$loading");
 
 const Submit = async () => {
   const loader = $loading.show();
-
+  console.log(user);
   try {
     await RegisterService.register(user);
     router.push("/login");

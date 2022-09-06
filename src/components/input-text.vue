@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-const emit = defineEmits(["input"]);
+const emit = defineEmits(["input","blur","update:modelValue"]);
 
 const props = defineProps({
   modelValue: { type: [String, Number], default: "" },
@@ -38,7 +38,7 @@ const internalValue = computed({
     return props.modelValue;
   },
   set: (newVal) => {
-    emit("input", newVal);
+    emit("update:modelValue", newVal);
   },
 });
 </script>

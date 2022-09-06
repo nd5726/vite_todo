@@ -15,39 +15,30 @@
             <label class="text-base font-bold text-font-main pb-1" for=""
               >Email</label
             >
-            <v-field
+            <InputText
               v-model="user.email"
-              type="email"
               name="email"
-              label="Email"
-              class="bg-white text-font-main rounded-[10px] px-4 py-3 w-full"
-              placeholder="請輸入Email"
+              inputType="email"
+              placeHolder="請輸入Email"
               rules="required|email"
-              :class="{ 'is-invalid': errors['email'] }"
-            ></v-field>
-            <error-message
-              name="email"
-              class="text-red-700 pl-2"
-            ></error-message>
+              labelValue="Email"
+              :classValue="['bg-white text-font-main rounded-[10px] px-4 py-3 w-full' , { 'is-invalid': errors['email'] }]"
+            ></InputText>
+
           </div>
           <div class="flex flex-col mb-6 items-start">
             <label class="text-base font-bold text-font-main pb-1" for=""
               >密碼</label
             >
-            <v-field
+            <InputText
               v-model="user.password"
-              type="password"
               name="password"
-              label="密碼"
-              class="bg-white text-font-main rounded-[10px] px-4 py-3 w-full"
-              placeholder="請輸入密碼"
+              inputType="password"
+              placeHolder="請輸入密碼"
               rules="required"
-              :class="{ 'is-invalid': errors['password'] }"
-            ></v-field>
-            <error-message
-              name="password"
-              class="text-red-700 pl-2"
-            ></error-message>
+              labelValue="密碼"
+              :classValue="['bg-white text-font-main rounded-[10px] px-4 py-3 w-full' , { 'is-invalid': errors['password'] }]"
+            ></InputText>
           </div>
           <button
             type="submit"
@@ -80,6 +71,7 @@ import { reactive } from "vue";
 import { accountUser } from "@/@types/accountUser";
 import LoginService from "@/services/loginService";
 import router from "@/router";
+import { InputText } from "@/components";
 
 const user: accountUser = reactive({
   email: "",
