@@ -2,22 +2,22 @@ import { apiHelper } from "../http-common";
 import ResponseData from "@/@types/responseData";
 import { todoData } from "@/@types/todoData";
 
-class TodoDataService {
-  getAll() {
-    return apiHelper.get<ResponseData<todoData[]>>("/todos");
+class todoDataService {
+  getAll():Promise<ResponseData<todoData[]>> {
+    return apiHelper.get("/todos");
   }
 
-  create(data: todoData) {
-    return apiHelper.post<ResponseData>("/todos", { todo: data });
+  create(data: todoData):Promise<ResponseData> {
+    return apiHelper.post("/todos", { todo: data });
   }
 
-  update(id: string) {
-    return apiHelper.patch<ResponseData>(`/todos/${id}/toggle`);
+  update(id: string):Promise<ResponseData> {
+    return apiHelper.patch(`/todos/${id}/toggle`);
   }
 
-  delete(id: string) {
-    return apiHelper.delete<ResponseData>(`/todos/${id}`);
+  delete(id: string):Promise<ResponseData> {
+    return apiHelper.delete(`/todos/${id}`);
   }
 }
 
-export default new TodoDataService();
+export default new todoDataService();

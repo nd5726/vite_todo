@@ -101,7 +101,7 @@
 <script setup lang="ts">
 import router from "@/router";
 import LoginService from "@/services/loginService";
-import TodoDataService from "@/services/todoDataService";
+import todoDataService from "@/services/todoDataService";
 import { onMounted, computed, ref, inject } from "vue";
 import { todoData } from "@/@types/todoData";
 
@@ -137,7 +137,7 @@ const fetchData = async () => {
   try {
     const {
       data: { todos },
-    } = await TodoDataService.getAll();
+    } = await todoDataService.getAll();
     dataList.value = todos;
     showList.value = { ...dataList.value };
     current.value = "all";
@@ -165,7 +165,7 @@ const showData = (option: string) => {
 
 const addData = async () => {
   try {
-    await TodoDataService.create(data.value);
+    await todoDataService.create(data.value);
     data.value.content = "";
     fetchData();
   } catch (e) {
@@ -175,7 +175,7 @@ const addData = async () => {
 
 const deleteData = async (data: string) => {
   try {
-    await TodoDataService.delete(data);
+    await todoDataService.delete(data);
   } catch (e) {
     console.dir(e);
   }
@@ -201,7 +201,7 @@ const deleteFinishHandler = async () => {
 
 const updateHandler = async (data: string) => {
   try {
-    const res = await TodoDataService.update(data);
+    const res = await todoDataService.update(data);
     fetchData();
   } catch (e) {
     console.dir(e);

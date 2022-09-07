@@ -16,12 +16,7 @@ const routes = [
     path: "/main",
     name: "main",
     component: () => import("../views/mainView.vue"),
-  },
-  {
-    path: "/about",
-    name: "about",
-    component: () => import("../views/aboutView.vue"),
-  },
+  }
 ];
 
 const router = createRouter({
